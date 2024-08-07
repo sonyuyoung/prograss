@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* 박스 크기 조정을 위해 추가 */
+      }
+      body {
+      }
+      #process_wrap {
+        display: flex; /* Flexbox 레이아웃을 사용하여 자식 요소를 배치 */
+        align-items: center; /* 세로 중앙 정렬 */
+        justify-content: center; /* 수평 중앙 정렬 */
+        width: 100%;
+        height: 100vh; /* 화면 높이에 맞춰 요소를 배치 */
+        background: #eee;
+        padding: 20px; /* 화면 가장자리에 여백 추가 */
+      }
+      .process_container {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap; /* 컨테이너가 화면 크기에 맞춰 감싸도록 설정 */
+        justify-content: center;
+        align-items: center;
+        gap: 20px; /* 화면 크기에 따라 적절한 간격 설정 */
+        transition: opacity 1s; /* CSS 전환 추가 */
+      }
+
+      .circle {
+        margin: 0; /* 기본 마진을 제거 */
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 150px; /* 반응형을 위해 기본 크기 조정 */
+        height: 150px; /* 반응형을 위해 기본 크기 조정 */
+        border-radius: 50%;
+        background: #e3edf7;
+        transition: background 0.5s; /* CSS 전환 추가 */
+      }
+      .circle::before {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border-radius: 50%;
+        background: #e3edf7;
+        opacity: 0.8;
+      }
+      .circle::after {
+        content: "";
+        position: absolute;
+        width: 120px; /* 반응형을 위해 기본 크기 조정 */
+        height: 120px; /* 반응형을 위해 기본 크기 조정 */
+        background: #e3edf7;
+        border: 10px solid #eee;
+        border-radius: 50%;
+        box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.75), 0 -2px 2px rgba(255, 255, 255, 0.5),
+          inset 0 4px 2px rgba(0, 0, 0, 0.25),
+          inset 0 -2px 2px rgba(255, 255, 255, 0.5);
+      }
+      .number {
+        position: relative;
+        color: #fff;
+        z-index: 10;
+        line-height: 1em;
+        font-size: 2em; /* 반응형을 위해 기본 크기 조정 */
+      }
+      h4 {
+        position: relative;
+        color: #424242;
+        z-index: 10;
+        font-weight: 700;
+        font-size: 1em; /* 반응형을 위해 기본 크기 조정 */
+        line-height: 1em;
+        text-align: center; /* 텍스트 중앙 정렬 */
+      }
+      .number span {
+        font-size: 0.5em;
+        font-weight: 500;
+      }
+
+      /* 미디어 쿼리 추가 */
+      @media (min-width: 768px) {
+        .circle {
+          width: 200px; /* 화면이 중간 크기 이상일 때 크기 조정 */
+          height: 200px;
+        }
+        .circle::after {
+          width: 150px;
+          height: 150px;
+          border: 15px solid #e3edf7;
+        }
+        .number {
+          font-size: 2.5em;
+        }
+        h4 {
+          font-size: 1.2em;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .circle {
+          width: 250px; /* 화면이 큰 크기 이상일 때 크기 조정 */
+          height: 250px;
+        }
+        .circle::after {
+          width: 180px;
+          height: 180px;
+          border: 15px solid #e3edf7;
+        }
+        .number {
+          font-size: 3em;
+        }
+        h4 {
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="process_wrap">
+      <div class="process_container">
+        <div class="circle" data-degree="37" data-color="#377eed">
+          <h2 class="number">37<span>%</span></h2>
+          <h4>임플란트 주의염</h4>
+        </div>
+        <div class="circle" data-degree="26" data-color="#377eed">
+          <h2 class="number">26<span>%</span></h2>
+          <h4>픽스쳐 탈락, 파손</h4>
+        </div>
+        <div class="circle" data-degree="9" data-color="#000">
+          <h2 class="number">9<span>%</span></h2>
+          <h4>보철물 탈착,파손</h4>
+        </div>
+        <div class="circle" data-degree="9" data-color="#424242">
+          <h2 class="number">9<span>%</span></h2>
+          <h4>교합 불편감</h4>
+        </div>
+        <div class="circle" data-degree="9" data-color="#424242">
+          <h2 class="number">9<span>%</span></h2>
+          <h4>기타</h4>
+        </div>
+      </div>
+    </div>
+    <script>
+      // 'ticking' 플래그는 애니메이션 프레임이 요청되었는지 추적합니다.
+      let ticking = false;
+
+      // reveal 함수는 스크롤 이벤트가 발생할 때 호출됩니다.
+      function reveal() {
+        // 만약 ticking이 false라면, 즉 애니메이션 프레임 요청이 아직 되지 않았다면
+        if (!ticking) {
+          // 브라우저의 리프레시 주기와 동기화하여 애니메이션 프레임을 요청합니다.
+          window.requestAnimationFrame(() => {
+            // 모든 .process_container 요소를 선택합니다.
+            const containers = document.querySelectorAll(".process_container");
+            // 현재 창의 높이를 가져옵니다.
+            const windowHeight = window.innerHeight;
+            // 요소를 활성화할 기준점 (px)을 설정합니다.
+            const revealPoint = 200;
+
+            // 각 .process_container 요소에 대해
+            containers.forEach((container) => {
+              // 요소의 위치를 가져옵니다.
+              const containerTop = container.getBoundingClientRect().top;
+
+              // 요소가 기준점보다 위에 있으면
+              if (containerTop < windowHeight - revealPoint) {
+                // 'active' 클래스를 추가하여 요소를 보이게 합니다.
+                container.classList.add("active");
+                // 각 .circle 요소에 대해 animateCircle 함수를 호출하여 애니메이션을 적용합니다.
+                container.querySelectorAll(".circle").forEach(animateCircle);
+              } else {
+                // 그렇지 않으면 'active' 클래스를 제거하여 요소를 숨깁니다.
+                container.classList.remove("active");
+              }
+            });
+
+            // 애니메이션 프레임 요청이 완료되었음을 표시합니다.
+            ticking = false;
+          });
+          // 애니메이션 프레임 요청이 되었음을 표시합니다.
+          ticking = true;
+        }
+      }
+
+      // animateCircle 함수는 .circle 요소의 애니메이션을 처리합니다.
+      function animateCircle(circle) {
+        let degree = 0; // 초기 각도
+        // .circle 요소의 'data-degree' 속성에서 목표 각도를 가져옵니다.
+        const targetDegree = parseInt(circle.getAttribute("data-degree"), 10);
+        // .circle 요소의 'data-color' 속성에서 색상을 가져옵니다.
+        const color = circle.getAttribute("data-color");
+        // .circle 요소의 .number 요소를 선택합니다.
+        const number = circle.querySelector(".number");
+
+        // setInterval을 사용하여 애니메이션을 구현합니다.
+        const interval = setInterval(() => {
+          degree += 1; // 각도를 1도씩 증가시킵니다.
+          if (degree > targetDegree) {
+            // 목표 각도에 도달하면 setInterval을 중지합니다.
+            clearInterval(interval);
+            degree = targetDegree;
+          }
+          // conic-gradient를 사용하여 배경을 업데이트합니다.
+          circle.style.background = `conic-gradient(${color} ${degree}%, #222 0%)`;
+          // 숫자의 색상을 목표 색상으로 업데이트합니다.
+          number.style.color = color;
+        }, 50); // 50ms 간격으로 애니메이션을 업데이트합니다.
+      }
+
+      // 스크롤 이벤트가 발생할 때 reveal 함수를 호출합니다.
+      window.addEventListener("scroll", reveal);
+      // 페이지가 로드되면 reveal 함수를 한 번 호출하여 초기 상태를 설정합니다.
+      document.addEventListener("DOMContentLoaded", reveal);
+    </script>
+  </body>
+</html>
