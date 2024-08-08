@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 기본 스타일 설정 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: #1d2630;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      /* 스피닝 사각형 애니메이션 */
+      .spinner-box {
+        width: 300px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+      }
+
+      .configure-border-1 {
+        width: 115px;
+        height: 115px;
+        padding: 3px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fb5b53;
+        animation: configure-clockwise 3s ease-in-out 0s infinite alternate;
+      }
+
+      .configure-border-2 {
+        width: 115px;
+        height: 115px;
+        padding: 3px;
+        left: -115px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(63, 249, 220);
+        transform: rotate(45deg);
+        animation: configure-xclockwise 3s ease-in-out 0s infinite alternate;
+      }
+
+      .configure-core {
+        width: 100%;
+        height: 100%;
+        background-color: #1d2630;
+      }
+
+      .configure-border-1 {
+        background: #fb5b53;
+        animation: configure-clockwise 3s ease-in-out infinite alternate;
+      }
+
+      .configure-border-2 {
+        background: rgb(63, 249, 220);
+        transform: rotate(45deg);
+        animation: configure-xclockwise 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes configure-clockwise {
+        0% {
+          transform: rotate(0);
+        }
+        25% {
+          transform: rotate(90deg);
+        }
+        50% {
+          transform: rotate(180deg);
+        }
+        75% {
+          transform: rotate(270deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes configure-xclockwise {
+        0% {
+          transform: rotate(45deg);
+        }
+        25% {
+          transform: rotate(-45deg);
+        }
+        50% {
+          transform: rotate(-135deg);
+        }
+        75% {
+          transform: rotate(-225deg);
+        }
+        100% {
+          transform: rotate(-315deg);
+        }
+      }
+
+      /* 펄스 버블 애니메이션 */
+      .pulse-container {
+        width: 120px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .pulse-bubble {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #3ff9dc;
+      }
+
+      .pulse-bubble-1 {
+        animation: pulse 0.4s ease infinite alternate;
+      }
+      .pulse-bubble-2 {
+        animation: pulse 0.4s ease 0.2s infinite alternate;
+      }
+      .pulse-bubble-3 {
+        animation: pulse 0.4s ease 0.4s infinite alternate;
+      }
+
+      @keyframes pulse {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0.25;
+          transform: scale(0.75);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 스피닝 사각형 애니메이션 -->
+    <div class="spinner-box">
+      <div class="configure-border-1">
+        <div class="configure-core"></div>
+      </div>
+      <div class="configure-border-2">
+        <div class="configure-core"></div>
+      </div>
+    </div>
+
+    <!-- 펄스 버블 애니메이션 -->
+    <div class="spinner-box">
+      <div class="pulse-container">
+        <div class="pulse-bubble pulse-bubble-1"></div>
+        <div class="pulse-bubble pulse-bubble-2"></div>
+        <div class="pulse-bubble pulse-bubble-3"></div>
+      </div>
+    </div>
+  </body>
+</html>

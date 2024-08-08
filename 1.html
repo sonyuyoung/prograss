@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #fff;
+        overflow: hidden; /* 배경 원이 페이지를 넘지 않도록 */
+        position: relative; /* absolute 요소에 대한 기준 */
+      }
+      .card_container_wrap {
+        position: relative;
+        border: 1px dashed #000;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+      }
+      .card_container1 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        width: 100%;
+        height: 100%;
+      }
+      .card_per {
+        width: 400px;
+        height: 400px;
+        background: #377eed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* 정중앙 정렬 */
+      }
+      .card_per .center_txt {
+        font-size: 50px;
+        text-align: center;
+        color: #fff;
+      }
+      .card_per .title {
+        font-size: 50px;
+        text-align: center;
+      }
+      .card_per1 {
+        position: absolute;
+        top: 0%; /* 상단 중앙 위치 */
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #377eed;
+        background: #fff;
+        border-radius: 50%;
+        transform: translate(-50%, 0); /* 상단 중앙 정렬 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card_per2 {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #377eed;
+        background: #fff;
+        border-radius: 50%;
+        transform: translate(-50%, 50%); /* 하단 중앙 정렬 */
+      }
+      .card_per3 {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #377eed;
+        background: #fff;
+        border-radius: 50%;
+        transform: translate(-50%, -50%); /* 세로 중앙 정렬 */
+      }
+      .card_per4 {
+        position: absolute;
+        top: 50%;
+        right: 0%;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #377eed;
+        background: #fff;
+        border-radius: 50%;
+        transform: translate(50%, -50%); /* 세로 중앙 정렬 */
+      }
+      .percent {
+        position: absolute;
+        top: 50%; /* 카드 중앙에 위치 */
+        left: 50%;
+        width: 150px;
+        height: 150px;
+        transform: translate(-50%, -50%); /* 중앙 정렬 */
+      }
+      .percent svg {
+        width: 150px;
+        height: 150px;
+        transform: rotate(270deg);
+      }
+      .percent svg circle {
+        width: 100%;
+        height: 100%;
+        /* 테두리만 */
+        fill: transparent;
+        stroke-width: 2;
+        stroke: #191919;
+        transform: translate(5px, 5px);
+      }
+      .percent svg circle:nth-child(2) {
+        stroke: var(--clr);
+        stroke-dasharray: 440;
+        stroke-dashoffset: calc(
+          440 - (440 * var(--num)) / 100
+        ); /* 진행 상태 조정 */
+        opacity: 0;
+        animation: fadeIn 1s linear forwards;
+        animation-delay: 2s;
+      }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .dot {
+        position: absolute;
+        inset: 5px;
+        z-index: 10;
+        transform: rotate(calc(3.6deg * var(--num)));
+        animation: animateDot 2s linear forwards;
+      }
+      @keyframes animateDot {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(calc(3.6deg * var(--num)));
+        }
+      }
+      .dot::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background: var(--clr);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--clr), 0 0 30px var(--clr);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card_container_wrap">
+      <div class="card_container1">
+        <div class="card_per1">
+          <div class="percent" style="--clr: #377eed; --num: 85">
+            <div class="dot"></div>
+            <svg>
+              <circle cx="70" cy="70" r="70"></circle>
+              <circle cx="70" cy="70" r="70"></circle>
+            </svg>
+          </div>
+        </div>
+        <div class="card_per2"></div>
+        <div class="card_per3"></div>
+        <div class="card_per4"></div>
+      </div>
+      <div class="card_per">
+        <p class="center_txt">
+          <span class="title">디지털아트치과</span><br />핵심 기술력
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

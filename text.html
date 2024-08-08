@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #fff;
+        overflow: hidden; /* 배경 원이 페이지를 넘지 않도록 */
+        position: relative; /* absolute 요소에 대한 기준 */
+      }
+      .card_container_wrap {
+        position: relative;
+        z-index: 1; /* 콘텐츠가 배경 위에 오도록 설정 */
+      }
+      .card_container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+      .card_per {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+      .card_container1 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      .card_per1 {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background: #fff;
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        border-radius: 50%;
+      }
+      .card_container2 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 40px;
+      }
+      .card_per2 {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background: #fff;
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        border-radius: 50%;
+      }
+      #background-circles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 0; /* 배경이 콘텐츠 뒤에 오도록 설정 */
+      }
+      .large-circle {
+        position: absolute;
+        background-color: #eee;
+        width: 650px;
+        height: 650px;
+
+        border-radius: 50%;
+      }
+      .small-circle {
+        position: absolute;
+        background-color: #cecece;
+        width: 450px;
+        height: 450px;
+
+        border-radius: 50%;
+      }
+      .dotted-circle {
+        border: 1px dashed #2a2a2a;
+        width: 550px;
+        height: 550px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      .center_txt {
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="background-circles">
+      <div class="bg-circle large-circle"></div>
+      <div class="bg-circle small-circle"></div>
+      <div class="bg-circle dotted-circle"></div>
+      <div class="vertical-line"></div>
+      <div class="horizontal-line"></div>
+    </div>
+    <div class="card_container_wrap">
+      <div class="card_container1">
+        <div class="card_per1"></div>
+      </div>
+      <div class="card_container">
+        <div class="card_per"></div>
+        <div class="card_per">
+          <p class="center_txt">
+            <span class="title">디지털아트치과</span>핵심 기술력
+          </p>
+        </div>
+        <div class="card_per"></div>
+      </div>
+      <div class="card_container2">
+        <div class="card_per2"></div>
+      </div>
+    </div>
+  </body>
+</html>
